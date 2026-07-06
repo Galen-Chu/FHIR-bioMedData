@@ -1,0 +1,6 @@
+# 核心清洗管線僅使用標準函式庫，以下僅在起 HTTP Mock Server 時需要
+fastapi>=0.110
+uvicorn>=0.29
+
+# 開發 / 測試
+pytest>=8.0
