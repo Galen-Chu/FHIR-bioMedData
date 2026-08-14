@@ -51,6 +51,10 @@ python main_ingest.py --hospital B --input bio_data_pool/raw_hospital_B.csv
 python main_ingest.py --hospital A --input bio_data_pool/raw_hospital_A.json --hash-id
 ```
 
+另有兩個選項可用：`--schema` 指定 Patient schema 路徑（預設
+`bio_data_pool/fhir_patient_schema.json`）、`--rejects-out` 指定複核佇列輸出
+路徑（預設 `logs/rejected.jsonl`）。
+
 ### 搭配 HTTP Mock FHIR Server（選用）
 
 單獨執行 CLI 時使用行程內記憶體資料庫；若要讓多次 CLI 執行共用同一個資料庫
@@ -64,6 +68,7 @@ uvicorn server_mock_fhir.routes:app --port 8000
 python main_ingest.py --hospital A --input bio_data_pool/raw_hospital_A.json --server-url http://localhost:8000
 python main_ingest.py --hospital B --input bio_data_pool/raw_hospital_B.csv  --server-url http://localhost:8000
 curl http://localhost:8000/Patient        # 查看累積落庫結果
+curl http://localhost:8000/Patient/{identifier}  # 查看單一病患
 ```
 
 ## 測試
